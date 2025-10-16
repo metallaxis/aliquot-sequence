@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
         }
 
         ++num;
-
+	
         if (sequence == 'f') printf("%" PRIu64 "\n", number); // Print the value of number
 
         if (number > 1e15) { // Check if the number is above 10^15
