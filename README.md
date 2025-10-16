@@ -1,4 +1,4 @@
-This is a program that tries to follow the aliquot sequence but has a limit of 10^15 integer limit.
+This is a program that tries to follow the aliquot sequence but has a limit which is the 10^15 integer limit.
 
 # Compiling
 In order to compile you need to install gcc.
