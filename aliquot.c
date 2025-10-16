@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
-#include <math.h>
+
+double mysqrt_u64(uint64_t x);
 
 // Main Method
 int main(int argc, char **argv) {
@@ -14,7 +15,7 @@ int main(int argc, char **argv) {
 
     // Declaring the variables for the program
     uint64_t number;
-    size_t length;
+    unsigned long int length;
     char sequence;
 
     // Prompt for the staring number in the aliquot sequence
@@ -40,7 +41,7 @@ int main(int argc, char **argv) {
     }
 
     uint64_t initial_number = number; // Number before changes useful for debugging
-    size_t num = 0; // Initialize the variable for the loop necessery if the length from before is not 0
+    unsigned long int num = 0; // Initialize the variable for the loop necessery if the length from before is not 0
     char run = 1;
 
     while (run) { //If run is 1 run otherwise stop
@@ -59,7 +60,7 @@ int main(int argc, char **argv) {
         }
 
         uint64_t final = 0; // Set the default final number
-        uint64_t sqrt_num = (uint64_t) sqrt(number);
+        uint64_t sqrt_num = (uint64_t) mysqrt_u64(number);
 
         for (uint64_t i = 1; i <= sqrt_num; ++i) { // Run for every number from 1 to the square root of the number
             if (number % i == 0) { // Check if the number is divisible by i
@@ -89,4 +90,23 @@ int main(int argc, char **argv) {
     }
 
     return 0; // Finalize the program and exit with exit code 0 and finish successfully
+}
+
+double mysqrt_u64(uint64_t n) {
+    if (n == 0) return 0.0;
+    uint64_t x = n;
+    uint64_t y = (x + 1) >> 1;
+
+    // Integer Newton-Raphson iteration
+    while (y < x) {
+        x = y;
+        y = (x + n / x) >> 1;
+    }
+
+    // Convert to double for fractional correction
+    double d = (double)x;
+    double dn = (double)n;
+    // One Newton refinement step in double precision
+    d = 0.5 * (d + dn / d);
+    return d;
 }
