@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
     do { // Run once then check the loop
         if (length != 0) ++num;
 
-        if (number > 1e15/*1000000000000000llu*/) {
+        if (number > 1e15) {
             printf("Number exceeds maximum supported integer (1000000000000000). Stopping.\n");
             exit(1); // Exit the program with exit code 1
         }
