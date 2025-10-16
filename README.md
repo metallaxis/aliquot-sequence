@@ -1,7 +1,9 @@
 This is a program that tries to follow the aliquot sequence but has a limit which is the 10^15 integer limit.
 
-# Compiling
+## Compiling
 In order to compile you need to install gcc.
-Debian Linux: sudo apt-get install gcc
+
+Debian Linux: sudo apt-get install gcc<br/>
+Windows: choco install mingw
 
 And then compile it using gcc aliquot.c -o aliquot
