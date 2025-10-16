@@ -4,4 +4,4 @@ This is a program that tries to follow the aliquot sequence but has a limit whic
 In order to compile you need to install gcc.
 Debian Linux: sudo apt-get install gcc
 
-And then compile it using gcc aliquot.c -o aliquot -lm
+And then compile it using gcc aliquot.c -o aliquot
