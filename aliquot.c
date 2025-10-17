@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
 
     // Declaring the variables for the program
     uint64_t number;
-    unsigned long int length;
+    unsigned int length;
     char sequence;
 
     // Prompt for the staring number in the aliquot sequence
@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 
     // Prompt for the maximum length in the aliquot sequence
     printf("Provide the max aliquot length to look for (0 for unlimited): ");
-    if (scanf("%lu%c", &length, &term) != 2 || term != '\n') { // Check whether entered a integer
+    if (scanf("%u%c", &length, &term) != 2 || term != '\n') { // Check whether entered a integer
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
         exit(1); // Exit the program with exit code 1
     }
@@ -41,16 +41,13 @@ int main(int argc, char **argv) {
     }
 
     uint64_t initial_number = number; // Number before changes useful for debugging
-    unsigned long int num = 0; // Initialize the variable for the loop necessery if the length from before is not 0
-    char run = 1;
+    unsigned int num = 0; // Initialize the variable for the loop necessery if the length from before is not 0
 
-    while (run) { //If run is 1 run otherwise stop
-        if (number == 0 || (length == 0 ? 0 : num >= length)) {
-            run = 0;
-            break;
-        }
+    while (1) { // Run till it breaks out of the loop below
+        if (number == 0 || (length == 0 ? 0 : num > length)) // Check whether the program exit conditions are met
+            break; // Exit out the while loop
 
-        ++num;
+        ++num; // Incremeant num by 1.
 	
         if (sequence == 'f') printf("%" PRIu64 "\n", number); // Print the value of number
 
@@ -80,12 +77,12 @@ int main(int argc, char **argv) {
         number = final; //Assign the final value to the number to rerun with the new value
     }
 
-    if (sequence == 'l') printf("Length of aliquot sequence: %lu\n", num); //If the choice 'l' is selected print the length of the sequence
+    if (sequence == 'l') printf("Length of aliquot sequence: %u\n", num); //If the choice 'l' is selected print the length of the sequence
 
     // DEBUG
     if (argc > 1 && (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "--debug") == 0)) {
         printf("Number: %" PRIu64 "\n", initial_number);
-        printf("Length: %lu\n", length);
+        printf("Length: %u\n", length);
         printf("Sequence: %c\n", sequence);
     }
 
@@ -93,14 +90,14 @@ int main(int argc, char **argv) {
 }
 
 double mysqrt_u64(uint64_t n) {
-    if (n == 0) return 0.0;
+    if (n == 0) return 0.0; // If the number is 0 just return 0
     uint64_t x = n;
     uint64_t y = (x + 1) >> 1;
 
     // Integer Newton-Raphson iteration
-    while (y < x) {
-        x = y;
-        y = (x + n / x) >> 1;
+    while (y < x) { // While y < x
+        x = y; // Set x to y
+        y = (x + n / x) >> 1; // Shift the number (x+(n/x)) by 1 bit to the right
     }
 
     // Convert to double for fractional correction
@@ -108,5 +105,5 @@ double mysqrt_u64(uint64_t n) {
     double dn = (double)n;
     // One Newton refinement step in double precision
     d = 0.5 * (d + dn / d);
-    return d;
+    return d; // Return the square root
 }
