@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
         if (number == 0 || (length == 0 ? 0 : num > length)) // Check whether the program exit conditions are met
             break; // Exit out the while loop
 
-        ++num; // Incremeant num by 1.
+        ++num; // Incremeant num by 1
 	
         if (sequence == 'f') printf("%" PRIu64 "\n", number); // Print the value of number
 
