@@ -20,13 +20,6 @@ int main(int argc, char **argv) {
     char sequence;
 
     // Prompt for the staring number in the aliquot sequence
-    /*printf("Please give the number to start the aliquot sequence from: ");
-    if (scanf("%" SCNu64 "%c", &number, &term) != 2 || term != '\n') { // Check whether entered a integer and nothing else following it
-        printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
-        exit(1); // Exit the program with exit code 1
-    }*/
-
-    // Prompt for the staring number in the aliquot sequence
     printf("Please give the number to start the aliquot sequence from: ");
     if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
