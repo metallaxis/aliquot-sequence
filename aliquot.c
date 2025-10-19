@@ -10,33 +10,56 @@ double mysqrt_u64(uint64_t x);
 
 // Main Method
 int main(int argc, char **argv) {
-    // Declaring the checker variable
-    char term;
+    // Declaring the checker variables
+    char first, term;
 
     // Declaring the variables for the program
+    char input[100];
     uint64_t number;
     unsigned int length;
     char sequence;
 
     // Prompt for the staring number in the aliquot sequence
+    /*printf("Please give the number to start the aliquot sequence from: ");
+    if (scanf("%" SCNu64 "%c", &number, &term) != 2 || term != '\n') { // Check whether entered a integer and nothing else following it
+        printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
+        exit(1); // Exit the program with exit code 1
+    }*/
+
+    // Prompt for the staring number in the aliquot sequence
     printf("Please give the number to start the aliquot sequence from: ");
-    if (scanf("%" SCNu64 "%c", &number, &term) != 2 || term != '\n') { // Check whether entered a integer
+    if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
+        printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
+        exit(1); // Exit the program with exit code 1
+    }
+    ungetc(first, stdin);
+    if (scanf("%" SCNu64 "%c", &number, &term) != 2 || term != '\n') { // Check whether entered a integer and nothing else following it
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
         exit(1); // Exit the program with exit code 1
     }
 
     // Prompt for the maximum length in the aliquot sequence
     printf("Provide the max aliquot length to look for (0 for unlimited): ");
-    if (scanf("%u%c", &length, &term) != 2 || term != '\n') { // Check whether entered a integer
+    if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
+        printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
+        exit(1); // Exit the program with exit code 1
+    }
+    ungetc(first, stdin);
+    if (scanf("%u%c", &length, &term) != 2 || term != '\n') { // Check whether entered a integer and nothing else following it
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
         exit(1); // Exit the program with exit code 1
     }
 
     //Prompt for whether it should show the full sequence or just its length
     printf("Do you want to print the full sequence ('f') or just the length ('l')? ");
-    scanf("%c", &sequence);
-    if (sequence != 'f' && sequence != 'l') { // Check whether the value is 'l' or 'f'
-        printf("The value can onle be 'f' or 'l'. Stopping.\n"); // Show error if the variable is not 'l' or 'f'
+    // Check whether the value of sequence is 'l' or 'f' and nothing else following it
+    if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
+        printf("The value can only be 'f' or 'l'. Stopping.\n"); // Show error if the variable is not 'l' or 'f'
+        exit(1); // Exit the program with exit code 1
+    }
+    ungetc(first, stdin);
+    if ((scanf("%c%c", &sequence, &term) != 2 || term != '\n') || (sequence != 'f' && sequence != 'l')) {
+        printf("The value can only be 'f' or 'l'. Stopping.\n"); // Show error if the variable is not 'l' or 'f'
         exit(1); // Exit the program with exit code 1
     }
 
@@ -95,8 +118,8 @@ double mysqrt_u64(uint64_t n) {
     uint64_t y = (x + 1) >> 1;
 
     // Integer Newton-Raphson iteration
-    while (y < x) { // While y < x
-        x = y; // Set x to y
+    while (y < x) { // Run while y < x
+        x = y; // Set x to the value of y
         y = (x + n / x) >> 1; // Shift the number (x+(n/x)) by 1 bit to the right
     }
 
