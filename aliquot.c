@@ -14,7 +14,6 @@ int main(int argc, char **argv) {
     char first, term;
 
     // Declaring the variables for the program
-    char input[100];
     uint64_t number;
     unsigned int length;
     char sequence;
