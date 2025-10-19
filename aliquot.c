@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
     // Prompt for the staring number in the aliquot sequence
     printf("Please give the number to start the aliquot sequence from: ");
     if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
-        printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
+        printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
     }
     ungetc(first, stdin);
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
     // Prompt for the maximum length in the aliquot sequence
     printf("Provide the max aliquot length to look for (0 for unlimited): ");
     if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
-        printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
+        printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
     }
     ungetc(first, stdin);
@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     printf("Do you want to print the full sequence ('f') or just the length ('l')? ");
     // Check whether the value of sequence is 'l' or 'f' and nothing else following it
     if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
-        printf("The value can only be 'f' or 'l'. Stopping.\n"); // Show error if the variable is not 'l' or 'f'
+        printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
     }
     ungetc(first, stdin);
