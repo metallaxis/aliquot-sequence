@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
         exit(1); // Exit the program with exit code 1
     }
 
-    ungetc(first, stdin); // Return the value to since it is not empty
+    ungetc(first, stdin); // Return the value to stdin since it is not empty
     scanf("%s", input); // Get the full string of the input
 
     for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
         exit(1); // Exit the program with exit code 1
     }
 
-    ungetc(first, stdin); // Return the value to since it is not empty
+    ungetc(first, stdin); // Return the value to stdin since it is not empty
     scanf("%s", input); // Get the full string of the input
 
     for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
         exit(1); // Exit the program with exit code 1
     }
 
-    ungetc(first, stdin); // Return the value to since it is not empty
+    ungetc(first, stdin); // Return the value to stdin since it is not empty
     scanf("%s", input); // Get the full string of the input
     
     for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
