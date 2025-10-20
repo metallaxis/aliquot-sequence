@@ -40,6 +40,7 @@ int main(int argc, char **argv) {
         exit(1); // Exit the program with exit code 1
     }
     clear(); // Clear the input buffer
+    
 
     // Prompt for the maximum length in the aliquot sequence
     printf("Provide the max aliquot length to look for (0 for unlimited): ");
