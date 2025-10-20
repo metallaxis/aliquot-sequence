@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
         exit(1); // Exit the program with exit code 1
     }
     clear(); // Clear the input buffer
-    
+
 
     // Prompt for the maximum length in the aliquot sequence
     printf("Provide the max aliquot length to look for (0 for unlimited): ");
@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
     scanf("%s", input); // Get the full string of the input
 
     for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
-        if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space
+        if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space and if it is then return to stdin
     if (scanf("%u", &length) != 1) { // Check whether entered a integer and nothing else following it
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
         exit(1); // Exit the program with exit code 1
@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
     scanf("%s", input); // Get the full string of the input
     
     for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
-        if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space
+        if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space and if it is then return to stdin
     if ((scanf("%c", &sequence) != 1) || (sequence != 'f' && sequence != 'l')) {
         printf("The value can only be 'f' or 'l'. Stopping.\n"); // Show error if the variable is not 'l' or 'f'
         exit(1); // Exit the program with exit code 1
