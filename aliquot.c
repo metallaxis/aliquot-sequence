@@ -6,43 +6,59 @@
 #include <stdint.h>
 #include <inttypes.h>
 
+// Method declarations
 double mysqrt_u64(uint64_t x);
+void clear();
 
 // Main Method
 int main(int argc, char **argv) {
-    // Declaring the checker variables
-    char first, term;
+    // Declaring the checker variable
+    char first;
 
     // Declaring the variables for the program
+    char input[100];
     uint64_t number;
     unsigned int length;
     char sequence;
+
+    
 
     // Prompt for the staring number in the aliquot sequence
     printf("Please give the number to start the aliquot sequence from: ");
     if (scanf("%c", &first) != 1 || first == '\n') { // Check whether entered an empty line/space as an argument
         printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
-    } else if (first != ' ') { // Check if first is a space
-        ungetc(first, stdin); // Return the value to be picked up since it is not null
     }
-    if (scanf("%" SCNu64 "%c", &number, &term) != 2 || term != '\n') { // Check whether entered a integer and nothing else following it
+
+    ungetc(first, stdin); // Return the value to since it is not empty
+    scanf("%s", input); // Get the full string of the input
+
+    for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
+        if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space and if it is then return to stdin
+    if (scanf("%" SCNu64, &number) != 1) { // Check whether entered an integer
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
         exit(1); // Exit the program with exit code 1
     }
+    clear(); // Clear the input buffer
 
     // Prompt for the maximum length in the aliquot sequence
     printf("Provide the max aliquot length to look for (0 for unlimited): ");
     if (scanf("%c", &first) != 1 || first == '\n') { // Check whether entered an empty line as an argument
         printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
-    } else if (first != ' ') { // Check if first is a space
-        ungetc(first, stdin); // Return the value to be picked up since it is not null
     }
-    if (scanf("%u%c", &length, &term) != 2 || term != '\n') { // Check whether entered a integer and nothing else following it
+
+    ungetc(first, stdin); // Return the value to since it is not empty
+    scanf("%s", input); // Get the full string of the input
+
+    for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
+        if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space
+    if (scanf("%u", &length) != 1) { // Check whether entered a integer and nothing else following it
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
         exit(1); // Exit the program with exit code 1
     }
+    clear(); // Clear the input buffer
+
 
     //Prompt for whether it should show the full sequence or just its length
     printf("Do you want to print the full sequence ('f') or just the length ('l')? ");
@@ -50,13 +66,19 @@ int main(int argc, char **argv) {
     if (scanf("%c", &first) != 1 || first == '\n') { // Check whether entered an empty line as an argument
         printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
-    } else if (first != ' ') { // Check if first is a space
-        ungetc(first, stdin); // Return the value to be picked up since it is not null
     }
-    if ((scanf("%c%c", &sequence, &term) != 2 || term != '\n') || (sequence != 'f' && sequence != 'l')) {
+
+    ungetc(first, stdin); // Return the value to since it is not empty
+    scanf("%s", input); // Get the full string of the input
+    
+    for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
+        if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space
+    if ((scanf("%c", &sequence) != 1) || (sequence != 'f' && sequence != 'l')) {
         printf("The value can only be 'f' or 'l'. Stopping.\n"); // Show error if the variable is not 'l' or 'f'
         exit(1); // Exit the program with exit code 1
     }
+
+
 
     uint64_t initial_number = number; // Number before changes useful for debugging
     unsigned int num = 0; // Initialize the variable for the loop necessery if the length from before is not 0
@@ -123,4 +145,8 @@ double mysqrt_u64(uint64_t n) {
     // One Newton refinement step in double precision
     d = 0.5 * (d + dn / d);
     return d; // Return the square root
+}
+
+void clear() { 
+    while (getchar() != '\n'); // Run until you hit the new line character
 }
