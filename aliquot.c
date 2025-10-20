@@ -20,11 +20,12 @@ int main(int argc, char **argv) {
 
     // Prompt for the staring number in the aliquot sequence
     printf("Please give the number to start the aliquot sequence from: ");
-    if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
+    if (scanf("%c", &first) != 1 || first == '\n') { // Check whether entered an empty line/space as an argument
         printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
+    } else if (first != ' ') { // Check if first is a space
+        ungetc(first, stdin); // Return the value to be picked up since it is not null
     }
-    ungetc(first, stdin);
     if (scanf("%" SCNu64 "%c", &number, &term) != 2 || term != '\n') { // Check whether entered a integer and nothing else following it
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
         exit(1); // Exit the program with exit code 1
@@ -32,11 +33,12 @@ int main(int argc, char **argv) {
 
     // Prompt for the maximum length in the aliquot sequence
     printf("Provide the max aliquot length to look for (0 for unlimited): ");
-    if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
+    if (scanf("%c", &first) != 1 || first == '\n') { // Check whether entered an empty line as an argument
         printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
+    } else if (first != ' ') { // Check if first is a space
+        ungetc(first, stdin); // Return the value to be picked up since it is not null
     }
-    ungetc(first, stdin);
     if (scanf("%u%c", &length, &term) != 2 || term != '\n') { // Check whether entered a integer and nothing else following it
         printf("The value entered is not of type integer. Stopping.\n"); // Show error if the variable is not an integer
         exit(1); // Exit the program with exit code 1
@@ -45,11 +47,12 @@ int main(int argc, char **argv) {
     //Prompt for whether it should show the full sequence or just its length
     printf("Do you want to print the full sequence ('f') or just the length ('l')? ");
     // Check whether the value of sequence is 'l' or 'f' and nothing else following it
-    if (scanf("%c", &first) != 1 || first == '\n' || first == ' ') { // Check whether entered an empty line/space as an argument
+    if (scanf("%c", &first) != 1 || first == '\n') { // Check whether entered an empty line as an argument
         printf("You didn't enter a value. Stopping.\n"); // Show error if no value was entered
         exit(1); // Exit the program with exit code 1
+    } else if (first != ' ') { // Check if first is a space
+        ungetc(first, stdin); // Return the value to be picked up since it is not null
     }
-    ungetc(first, stdin);
     if ((scanf("%c%c", &sequence, &term) != 2 || term != '\n') || (sequence != 'f' && sequence != 'l')) {
         printf("The value can only be 'f' or 'l'. Stopping.\n"); // Show error if the variable is not 'l' or 'f'
         exit(1); // Exit the program with exit code 1
@@ -59,12 +62,12 @@ int main(int argc, char **argv) {
     unsigned int num = 0; // Initialize the variable for the loop necessery if the length from before is not 0
 
     while (1) { // Run till it breaks out of the loop below
+        if (sequence == 'f' && (length == 0 ? 1 : num <= length)) printf("%" PRIu64 "\n", number); // Print the value of number
+
         if (number == 0 || (length == 0 ? 0 : num > length)) // Check whether the program exit conditions are met
             break; // Exit out the while loop
 
         ++num; // Incremeant num by 1
-	
-        if (sequence == 'f') printf("%" PRIu64 "\n", number); // Print the value of number
 
         if (number > 1e15) { // Check if the number is above 10^15
             printf("Number exceeds maximum supported integer (1000000000000000). Stopping.\n"); // Show an error if its
@@ -88,7 +91,6 @@ int main(int argc, char **argv) {
                 printf("I: %" PRIu64 ", Final: %" PRIu64 "\n", i, final);
         }
 
-        if (sequence == 'f' && number == 1) printf("%" PRIu64 "\n", final); // Print the value of final if the number is 1
         number = final; //Assign the final value to the number to rerun with the new value
     }
 
@@ -107,7 +109,7 @@ int main(int argc, char **argv) {
 double mysqrt_u64(uint64_t n) {
     if (n == 0) return 0.0; // If the number is 0 just return 0
     uint64_t x = n;
-    uint64_t y = (x + 1) >> 1;
+    uint64_t y = (x + 1) >> 1; // Set y to (x+1) and then shift it by one bit to the right
 
     // Integer Newton-Raphson iteration
     while (y < x) { // Run while y < x
