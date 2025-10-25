@@ -6,8 +6,7 @@
 #include <stdint.h>
 #include <inttypes.h>
 
-// Method declarations
-double mysqrt_u64(uint64_t x);
+// Method declaration
 void clear();
 
 // Main Method
@@ -98,9 +97,8 @@ int main(int argc, char **argv) {
         }
 
         uint64_t final = 0; // Set the default final number
-        uint64_t sqrt_num = (uint64_t) mysqrt_u64(number);
 
-        for (uint64_t i = 1; i <= sqrt_num; ++i) { // Run for every number from 1 to the square root of the number
+        for (uint64_t i = 1; i*i <= number; ++i) { // Run for every number from 1 to the square root of the number
             if (number % i == 0) { // Check if the number is divisible by i
                 uint64_t paired = number / i; // Get the paired number that if multiplied with i gets the number
 
@@ -127,25 +125,6 @@ int main(int argc, char **argv) {
     }
 
     return 0; // Finalize the program and exit with exit code 0 and finish successfully
-}
-
-double mysqrt_u64(uint64_t n) {
-    if (n == 0) return 0.0; // If the number is 0 just return 0
-    uint64_t x = n;
-    uint64_t y = (x + 1) >> 1; // Set y to (x+1) and then shift it by one bit to the right
-
-    // Integer Newton-Raphson iteration
-    while (y < x) { // Run while y < x
-        x = y; // Set x to the value of y
-        y = (x + n / x) >> 1; // Shift the number (x+(n/x)) by 1 bit to the right
-    }
-
-    // Convert to double for fractional correction
-    double d = (double)x;
-    double dn = (double)n;
-    // One Newton refinement step in double precision
-    d = 0.5 * (d + dn / d);
-    return d; // Return the square root
 }
 
 void clear() { 
