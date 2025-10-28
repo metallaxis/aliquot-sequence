@@ -33,7 +33,3 @@ gcc -O0 -m32 -Wall -Wextra -Werror -pedantic -o aliquot aliquot.c
 ## Sources / Extra Info
 [Aliquot Sequence](https://en.wikipedia.org/wiki/Aliquot_sequence.)<br>
 [HW0 Webpage](https://progintro.github.io/assets/pdf/hw0.pdf)<br>
-
-### Commit History από το αρχικό repository
-Επίσης υπάρχουν περισσότερα commits [εδώ](https://github.com/metallaxis/aliquot-sequence)
-(Έχει και compiled executable στο Releases tab)
