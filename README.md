@@ -13,7 +13,6 @@ Do you want to print the full sequence ('f') or just the length ('l')? f
 16
 15
 9
-9
 4
 3
 1
