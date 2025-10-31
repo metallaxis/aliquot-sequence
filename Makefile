@@ -42,7 +42,7 @@ endif
 
 # ------------------------------------------------------------
 # Project source files
-# Recursively find all .cpp files under src/
+# Recursively find all .c files under src/
 CODE = $(shell find $(SRC) -name '*.c')
 OBJS = $(CODE) $(RESOURCES_C)
 
