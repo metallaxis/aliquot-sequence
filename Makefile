@@ -1,5 +1,5 @@
 # ============================================================
-#   C++ Cross-Platform Build System for Raylib Project
+#   C Cross-Platform Build System for Aliquo Sequence Project
 # ============================================================
 
 # Default Compiler (will be set based on platform)
