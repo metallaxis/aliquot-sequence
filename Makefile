@@ -87,8 +87,10 @@ $(OUT): $(OBJS)
 # Run target
 run: $(OUT)
 ifeq ($(PLATFORM), windows)
-	@echo "Running not supported in Makefile for Windows. Please run $(OUT) manually."
+	@echo "Running application..."
+	@start "" "$(OUT)"
 else ifeq ($(PLATFORM), linux)
+	@echo "Running application..."
 	cd $(BUILD_DIR) && ./aliquot
 else
 	@echo "Specify a platform: make run linux or make run windows"

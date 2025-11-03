@@ -39,9 +39,8 @@ make build (windows/linux)
 ```
 To run use:
 ```sh
-make run linux
+make run (windows/linux)
 ```
-(to run on windows you need to execute it manually)
 
 ## Sources / Extra Info
 [Aliquot Sequence](https://en.wikipedia.org/wiki/Aliquot_sequence.)<br>
