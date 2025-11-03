@@ -51,7 +51,10 @@ int main(int argc, char **argv) {
 
     // Prompt for the maximum length in the aliquot sequence
     printf("Provide the max aliquot length to look for (0 for unlimited): ");
-    scanf("%s", input); // Get the full string of the input
+    if (scanf("%s", input) != 1) { // Get the full string of the input
+        printf("Failed reading the string from stdin. Please retry.");
+        exit(1);
+    }
 
     for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
         if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space and if it is then return to stdin
@@ -64,7 +67,10 @@ int main(int argc, char **argv) {
     //Prompt for whether it should show the full sequence or just its length
     printf("Do you want to print the full sequence ('f') or just the length ('l')? ");
     // Check whether the value of sequence is 'l' or 'f' and nothing else following it
-    scanf("%s", input); // Get the full string of the input
+    if (scanf("%s", input) != 1) { // Get the full string of the input
+        printf("Failed reading the string from stdin. Please retry.");
+        exit(1);
+    }
     
     for (int i = strlen(input)-1; i >= 0; --i) // Run backwards from the string length to 0 (-1 to ignore the null terminator)
         if (input[i] != ' ') ungetc(input[i], stdin); // Check whether the character at index i is a space and if it is then return to stdin
