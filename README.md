@@ -29,7 +29,7 @@ Do you want to print the full sequence ('f') or just the length ('l')? f
 
 ## Cloning
 ```sh
-git clone https://github.com/progintro/hw0-metallaxis.git
+git clone https://github.com/metallaxis/aliquot-sequence.git
 ```
 
 ## Compiling
